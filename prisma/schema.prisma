@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Content {
+  id                       Int      @id @default(autoincrement()) @unique
+  logoName                 String   @default("MicoPage")
+  logoImgUrl               String   @default("/media/icons/default-logo.png")
+  createdAt                DateTime @default(now())
+  address                  String
+  phone                    String
+  email                    String
+  mainBlockTitle           String   @default("Mico Page 👋")
+  mainBlockDescription     String   @default("Choose a template and make a website")
+  mainBlockImgUrl          String   @default("/media/icons/default.png")
+  services                 ContentService[]
+  works                    ContentWork[]
+  socialMedia              ContentSocialMedia[]
+}
+
+model Visit {
+  id                  Int      @id @default(autoincrement()) @unique
+  createdAt           DateTime @default(now())
+  json                Json?
+}
+
+model ContentService {
+  id        Int      @id @default(autoincrement())
+  title     String
+  items     ContentItem[] 
+  imgUrl    String   @default("/media/icons/default.png")
+  contentId Int      
+  content   Content  @relation(fields: [contentId], references: [id])
+}
+
+model ContentWork {
+  id        Int      @id @default(autoincrement())
+  title     String
+  contentId Int
+  imgUrl    String   @default("/media/icons/default.png")
+  content   Content  @relation(fields: [contentId], references: [id])
+}
+
+model ContentItem {
+  id        Int      @id @default(autoincrement())
+  text      String   
+  serviceId Int?     
+  service   ContentService? @relation(fields: [serviceId], references: [id])
+}
+
+model ContentSocialMedia {
+  id            Int      @id @default(autoincrement())
+  contentId     Int
+  title         String   @default("MicoPage")
+  linkToSM      String   @default("https://github.com/okmic")      
+  imgUrl        String   @default("/media/icons/whatsapp.png")
+  content       Content  @relation(fields: [contentId], references: [id])
+}
