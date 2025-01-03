@@ -27,6 +27,7 @@ model Content {
   services                 ContentService[]
   works                    ContentWork[]
   socialMedia              ContentSocialMedia[]
+  products                 SiteProducts[]
 }
 
 model Visit {
@@ -65,5 +66,15 @@ model ContentSocialMedia {
   title         String   @default("MicoPage")
   linkToSM      String   @default("https://github.com/okmic")      
   imgUrl        String   @default("/media/icons/whatsapp.png")
+  content       Content  @relation(fields: [contentId], references: [id])
+}
+
+model SiteProducts {
+  id            Int      @id @default(autoincrement())
+  title         String   @default("MicoPage")
+  imgUrl        String   @default("/media/icons/whatsapp.png")
+  description   String   @db.LongText()
+  price         Int
+  contentId     Int      
   content       Content  @relation(fields: [contentId], references: [id])
 }
