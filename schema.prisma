@@ -72,7 +72,7 @@ model ContentSocialMedia {
 model SiteProducts {
   id            Int      @id @default(autoincrement())
   title         String   @default("MicoPage")
-  imgUrl        String   @default("/media/icons/whatsapp.png")
+  imgUrl        String   @default("/media/icons/default.png")
   description   String   @db.LongText()
   price         Int
   contentId     Int      
