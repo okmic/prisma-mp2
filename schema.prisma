@@ -18,6 +18,7 @@ model Content {
   logoName                 String   @default("MicoPage")
   logoImgUrl               String   @default("/media/icons/default-logo.png")
   createdAt                DateTime @default(now())
+  companyDescription       String   @default("Mico Page - мы занимается предоставлением высококачественных услуг в области... Мы стремимся к инновациям и качеству")
   address                  String
   phone                    String
   email                    String
