@@ -13,6 +13,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum TariffStatus {
+  PREMIUM
+  FREE
+}
+
+model User {
+  id                      Int             @id @default(autoincrement()) @unique
+  createdAt               DateTime        @default(now())
+  adminTgChatId           String           @unique()
+  isDisabled              Boolean         @default(false)
+  TariffStatus            TariffStatus     @default(FREE)
+
+  // Связь с родительским пользователем
+  parentId                Int?             @unique
+  parentUser              User?            @relation("User Children", fields: [parentId], references: [id])
+
+  // Связь с дочерними пользователями
+  childUsers              User[]           @relation("User Children")
+}
+
 model Content {
   id                       Int      @id @default(autoincrement()) @unique
   logoName                 String   @default("MicoPage")
