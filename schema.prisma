@@ -21,7 +21,7 @@ enum TariffStatus {
 model User {
   id                      Int              @id @default(autoincrement()) @unique
   createdAt               DateTime         @default(now())
-  adminTgChatId           String           @unique()
+  adminTgChatId           String           @unique() 
   isDisabled              Boolean          @default(false)
   TariffStatus            TariffStatus     @default(FREE)
 
@@ -29,6 +29,8 @@ model User {
   parentUser              User?            @relation("User Children", fields: [parentId], references: [id])
   childUsers              User[]           @relation("User Children")
   content                 Content[]        @relation("User Content")
+
+  @@index([adminTgChatId])
 }
 
 model Content {
@@ -49,6 +51,8 @@ model Content {
   works                    ContentWork[]
   socialMedia              ContentSocialMedia[]
   products                 SiteProducts[]
+
+  @@index([userId])
 }
 
 model Visit {
