@@ -19,22 +19,22 @@ enum TariffStatus {
 }
 
 model User {
-  id                      Int             @id @default(autoincrement()) @unique
-  createdAt               DateTime        @default(now())
+  id                      Int              @id @default(autoincrement()) @unique
+  createdAt               DateTime         @default(now())
   adminTgChatId           String           @unique()
-  isDisabled              Boolean         @default(false)
+  isDisabled              Boolean          @default(false)
   TariffStatus            TariffStatus     @default(FREE)
 
-  // Связь с родительским пользователем
   parentId                Int?             @unique
   parentUser              User?            @relation("User Children", fields: [parentId], references: [id])
-
-  // Связь с дочерними пользователями
   childUsers              User[]           @relation("User Children")
+  content                 Content[]        @relation("User Content")
 }
 
 model Content {
   id                       Int      @id @default(autoincrement()) @unique
+  userId                   Int     
+  user                     User     @relation("User Content", fields: [userId], references: [id])
   logoName                 String   @default("MicoPage")
   logoImgUrl               String   @default("/media/icons/default-logo.png")
   createdAt                DateTime @default(now())
