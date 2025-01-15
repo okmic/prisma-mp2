@@ -67,7 +67,7 @@ model ContentService {
   items     ContentItem[] 
   imgUrl    String   @default("/media/icons/default.png")
   contentId Int      
-  content   Content  @relation(fields: [contentId], references: [id])
+  content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model ContentWork {
@@ -75,14 +75,14 @@ model ContentWork {
   title     String
   contentId Int
   imgUrl    String   @default("/media/icons/default.png")
-  content   Content  @relation(fields: [contentId], references: [id])
+  content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model ContentItem {
   id        Int      @id @default(autoincrement())
   text      String   
   serviceId Int?     
-  service   ContentService? @relation(fields: [serviceId], references: [id])
+  service   ContentService? @relation(fields: [serviceId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model ContentSocialMedia {
@@ -91,7 +91,7 @@ model ContentSocialMedia {
   title         String   @default("MicoPage")
   linkToSM      String   @default("https://github.com/okmic")      
   imgUrl        String   @default("/media/icons/whatsapp.png")
-  content       Content  @relation(fields: [contentId], references: [id])
+  content       Content  @relation(fields: [contentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model SiteProducts {
@@ -101,5 +101,5 @@ model SiteProducts {
   description   String   @db.LongText()
   price         Int
   contentId     Int      
-  content       Content  @relation(fields: [contentId], references: [id])
+  content       Content  @relation(fields: [contentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
