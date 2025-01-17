@@ -7,6 +7,7 @@ const saveContent = async () => {
 
     const newContent = await prisma.content.create({
         data: {
+            userId: 1,
             address: "Адрес",
             phone: "+7 999 999 99 99",
             email: "Почта",
