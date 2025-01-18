@@ -29,24 +29,39 @@ model User {
   parentUser              User?            @relation("User Children", fields: [parentId], references: [id])
   childUsers              User[]           @relation("User Children")
   content                 Content[]        @relation("User Content")
+  ftpServers              FtpServers[]      @relation("User FTP SERVER")
 
   @@index([adminTgChatId])
 }
 
-model Content {
+model FtpServers {
   id                       Int      @id @default(autoincrement()) @unique
-  userId                   Int     
-  user                     User     @relation("User Content", fields: [userId], references: [id])
-  logoName                 String   @default("MicoPage")
-  logoImgUrl               String   @default("/media/icons/default-logo.png")
   createdAt                DateTime @default(now())
-  companyDescription       String   @default("Mico Page - мы занимается предоставлением высококачественных услуг в области... Мы стремимся к инновациям и качеству")
+
+  ftpHost                  String
+  ftpUser                  String
+  ftpPassword              String
+  isSecureFtp              Boolean  @default(false)
+
+  userId                   Int     
+  user                     User     @relation("User FTP SERVER", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  contentId                Int     
+}
+
+model Content {
+  id                       Int              @id @default(autoincrement()) @unique
+  createdAt                DateTime         @default(now())
+  userId                   Int     
+  user                     User             @relation("User Content", fields: [userId], references: [id])
+  logoName                 String           @default("MicoPage")
+  logoImgUrl               String           @default("/media/icons/default-logo.png")
+  companyDescription       String           @default("Mico Page - мы занимается предоставлением высококачественных услуг в области... Мы стремимся к инновациям и качеству")
   address                  String
   phone                    String
   email                    String
-  mainBlockTitle           String   @default("Mico Page 👋")
-  mainBlockDescription     String   @default("Choose a template and make a website")
-  mainBlockImgUrl          String   @default("/media/icons/default.png")
+  mainBlockTitle           String           @default("Mico Page 👋")
+  mainBlockDescription     String           @default("Choose a template and make a website")
+  mainBlockImgUrl          String           @default("/media/icons/default.png")
   services                 ContentService[]
   works                    ContentWork[]
   socialMedia              ContentSocialMedia[]
