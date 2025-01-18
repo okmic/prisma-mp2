@@ -29,12 +29,12 @@ model User {
   parentUser              User?            @relation("User Children", fields: [parentId], references: [id])
   childUsers              User[]           @relation("User Children")
   content                 Content[]        @relation("User Content")
-  ftpServers              FtpServers[]      @relation("User FTP SERVER")
+  ftpServers              FtpServer[]      @relation("User FTP SERVER")
 
   @@index([adminTgChatId])
 }
 
-model FtpServers {
+model FtpServer {
   id                       Int      @id @default(autoincrement()) @unique
   createdAt                DateTime @default(now())
 
