@@ -48,7 +48,6 @@ model Site {
   pegesStringArray         Json        
   userId                   Int
   user                     User         @relation("User Sites", fields: [userId], references: [id])
-  contentId                Int 
   content                  Content[]    @relation("Site Content")
 }
 
