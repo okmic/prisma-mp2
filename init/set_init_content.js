@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 const saveContent = async () => {
 
-    const newContent = await prisma.content.create({
+    const newContent = await prisma.site.create({
         data: {
             userId: 1,
             address: "Адрес",
