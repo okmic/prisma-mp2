@@ -22,6 +22,7 @@ model User {
   id                      Int              @id @default(autoincrement()) @unique
   createdAt               DateTime         @default(now())
   adminTgChatId           String           @unique() 
+  tgLogin                 String    
   isDisabled              Boolean          @default(false)
   TariffStatus            TariffStatus     @default(FREE)
 
