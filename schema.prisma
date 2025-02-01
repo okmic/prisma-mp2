@@ -40,9 +40,11 @@ enum SiteType {
 
 model Site {
   id                       Int          @id @default(autoincrement()) @unique
+  siteHash                 String       @default(uuid())
   createdAt                DateTime     @default(now())
+  name                     String       @default("Mico Page")
   Type                     SiteType     @default(EJS)
-  pegesStringArray         Json?        
+  pegesStringArray         Json        
   userId                   Int
   user                     User         @relation("User Sites", fields: [userId], references: [id])
   contentId                Int 
