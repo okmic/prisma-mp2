@@ -71,14 +71,14 @@ model Content {
   siteId                   Int     
   site                     Site             @relation("Site Content", fields: [siteId], references: [id])
   logoName                 String           @default("MicoPage")
-  logoImgUrl               String           @default("/media/icons/default-logo.png")
+  logoImgUrl               String           @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQHPxTQOIal5YuQgMVMiS3GLf-NkkJitBRjQ&s")
   companyDescription       String           @default("Mico Page - мы занимается предоставлением высококачественных услуг в области... Мы стремимся к инновациям и качеству")
   address                  String
   phone                    String
   email                    String
   mainBlockTitle           String           @default("Mico Page 👋")
   mainBlockDescription     String           @default("Choose a template and make a website")
-  mainBlockImgUrl          String           @default("/media/icons/default.png")
+  mainBlockImgUrl          String           @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQHPxTQOIal5YuQgMVMiS3GLf-NkkJitBRjQ&s")
   services                 ContentService[]
   works                    ContentWork[]
   socialMedia              ContentSocialMedia[]
@@ -97,7 +97,7 @@ model ContentService {
   id        Int      @id @default(autoincrement())
   title     String
   items     ContentItem[] 
-  imgUrl    String   @default("/media/icons/default.png")
+  imgUrl    String   @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQHPxTQOIal5YuQgMVMiS3GLf-NkkJitBRjQ&s")
   contentId Int      
   content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
@@ -106,7 +106,7 @@ model ContentWork {
   id        Int      @id @default(autoincrement())
   title     String
   contentId Int
-  imgUrl    String   @default("/media/icons/default.png")
+  imgUrl    String   @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQHPxTQOIal5YuQgMVMiS3GLf-NkkJitBRjQ&s")
   content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
@@ -129,7 +129,7 @@ model ContentSocialMedia {
 model SiteProducts {
   id            Int      @id @default(autoincrement())
   title         String   @default("MicoPage")
-  imgUrl        String   @default("/media/icons/default.png")
+  imgUrl        String   @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQHPxTQOIal5YuQgMVMiS3GLf-NkkJitBRjQ&s")
   description   String   @db.LongText()
   price         Int
   contentId     Int      
