@@ -69,7 +69,7 @@ model Content {
   id                       Int              @id @default(autoincrement()) @unique
   createdAt                DateTime         @default(now())
   siteId                   Int     
-  site                     Site             @relation("Site Content", fields: [siteId], references: [id])
+  site                     Site             @relation("Site Content", fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   logoName                 String           @default("MicoPage")
   logoImgUrl               String           @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQHPxTQOIal5YuQgMVMiS3GLf-NkkJitBRjQ&s")
   companyDescription       String           @default("Mico Page - мы занимается предоставлением высококачественных услуг в области... Мы стремимся к инновациям и качеству")
