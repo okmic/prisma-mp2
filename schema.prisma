@@ -62,7 +62,6 @@ model FtpServer {
 model Content {
   id                       Int              @id @default(autoincrement()) @unique
   createdAt                DateTime         @default(now())
-  siteId                   Int     
   logoName                 String           @default("MicoPage")
   logoImgUrl               String           @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQHPxTQOIal5YuQgMVMiS3GLf-NkkJitBRjQ&s")
   companyDescription       String           @default("Mico Page - мы занимается предоставлением высококачественных услуг в области... Мы стремимся к инновациям и качеству")
@@ -76,8 +75,6 @@ model Content {
   works                    ContentWork[]
   socialMedia              ContentSocialMedia[]
   products                 SiteProducts[]
-
-  @@index([siteId])
 }
 
 model Visit {
